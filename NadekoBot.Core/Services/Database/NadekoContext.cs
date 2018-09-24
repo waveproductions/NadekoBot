@@ -5,7 +5,6 @@ using NadekoBot.Core.Services.Database.Models;
 using NadekoBot.Extensions;
 using System;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Data.Sqlite;
 using System.IO;
 using NadekoBot.Core.Services.Impl;
 
@@ -17,9 +16,7 @@ namespace NadekoBot.Core.Services.Database
         {
             var optionsBuilder = new DbContextOptionsBuilder<NadekoContext>();
             IBotCredentials creds = new BotCredentials();
-            var builder = new SqliteConnectionStringBuilder(creds.Db.ConnectionString);
-            builder.DataSource = Path.Combine(AppContext.BaseDirectory, builder.DataSource);
-            optionsBuilder.UseSqlite(builder.ToString());
+            optionsBuilder.UseSqlServer(creds.Db.ConnectionString);
             var ctx = new NadekoContext(optionsBuilder.Options);
             ctx.Database.SetCommandTimeout(60);
             return ctx;

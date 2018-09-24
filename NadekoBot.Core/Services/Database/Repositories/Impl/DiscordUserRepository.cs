@@ -16,15 +16,14 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
         public void EnsureCreated(ulong userId, string username, string discrim, string avatarId)
         {
             _context.Database.ExecuteSqlCommand($@"
-UPDATE OR IGNORE DiscordUser 
-SET Username={username},
-    Discriminator={discrim},
-    AvatarId={avatarId}
-WHERE UserId={userId};
-
-INSERT OR IGNORE INTO DiscordUser (UserId, Username, Discriminator, AvatarId)
-VALUES ({userId}, {username}, {discrim}, {avatarId});
-");
+                                                    UPDATE DiscordUser
+                                                    SET Username={username},
+                                                    Discriminator={discrim},
+                                                    AvatarId={avatarId}
+                                                    WHERE UserId={userId}
+                                                    IF @@ROWCOUNT=0
+                                                        INSERT INTO DiscordUser (UserId, Username, Discriminator, AvatarId)
+                                                        VALUES ({userId}, {username}, {discrim}, {avatarId});");
         }
 
         //temp is only used in updatecurrencystate, so that i don't overwrite real usernames/discrims with Unknown
@@ -41,17 +40,11 @@ VALUES ({userId}, {username}, {discrim}, {avatarId});
 
         public int GetUserGlobalRank(ulong id)
         {
-            //            @"SELECT COUNT(*) + 1 
-            //FROM DiscordUser
-            //WHERE TotalXp > COALESCE((SELECT TotalXp 
-            //    FROM DiscordUser
-            //    WHERE UserId = @p1
-            //    LIMIT 1), 0);"
-            return _set.Where(x => x.TotalXp > (_set
-                    .Where(y => y.UserId == id)
-                    .Select(y => y.TotalXp)
-                    .FirstOrDefault()))
-                .Count() + 1;
+            return _set
+                       .Count(x => x.TotalXp > (_set
+                                       .Where(y => y.UserId == id)
+                                       .Select(y => y.TotalXp)
+                                       .FirstOrDefault())) + 1;
         }
 
         public DiscordUser[] GetUsersXpLeaderboardFor(int page)
@@ -85,7 +78,8 @@ VALUES ({userId}, {username}, {discrim}, {avatarId});
             }
         }
 
-        public bool TryUpdateCurrencyState(ulong userId, string name, string discrim, string avatarId, long amount, bool allowNegative = false)
+        public bool TryUpdateCurrencyState(ulong userId, string name, string discrim, string avatarId, long amount,
+            bool allowNegative = false)
         {
             if (amount == 0)
                 return true;
@@ -95,9 +89,9 @@ VALUES ({userId}, {username}, {discrim}, {avatarId});
             if (amount < 0 && !allowNegative)
             {
                 var rows = _context.Database.ExecuteSqlCommand($@"
-UPDATE DiscordUser
-SET CurrencyAmount=CurrencyAmount+{amount}
-WHERE UserId={userId} AND CurrencyAmount>={-amount};");
+                                                                    UPDATE DiscordUser
+                                                                    SET CurrencyAmount=CurrencyAmount+{amount}
+                                                                    WHERE UserId={userId} AND CurrencyAmount>={-amount};");
                 return rows > 0;
             }
 
@@ -105,9 +99,9 @@ WHERE UserId={userId} AND CurrencyAmount>={-amount};");
             if (amount < 0 && allowNegative)
             {
                 var rows = _context.Database.ExecuteSqlCommand($@"
-UPDATE DiscordUser
-SET CurrencyAmount=CurrencyAmount+{amount}
-WHERE UserId={userId};");
+                                                                    UPDATE DiscordUser
+                                                                    SET CurrencyAmount=CurrencyAmount+{amount}
+                                                                    WHERE UserId={userId};");
                 return rows > 0;
             }
 
@@ -123,42 +117,41 @@ WHERE UserId={userId};");
             if (!updatedUserData)
             {
                 _context.Database.ExecuteSqlCommand($@"
-UPDATE OR IGNORE DiscordUser 
-SET CurrencyAmount=CurrencyAmount+{amount}
-WHERE UserId={userId};
-
-INSERT OR IGNORE INTO DiscordUser (UserId, Username, Discriminator, AvatarId, CurrencyAmount)
-VALUES ({userId}, {name}, {discrim}, {avatarId}, {amount});
-");
+                                                        UPDATE DiscordUser
+                                                        SET CurrencyAmount=CurrencyAmount+{amount}
+                                                        WHERE UserId={userId}
+                                                        IF @@ROWCOUNT=0
+                                                            INSERT INTO DiscordUser (UserId, Username, Discriminator, AvatarId, CurrencyAmount)
+                                                            VALUES ({userId}, {name}, {discrim}, {avatarId}, {amount});");
             }
             else
             {
                 _context.Database.ExecuteSqlCommand($@"
-UPDATE OR IGNORE DiscordUser 
-SET CurrencyAmount=CurrencyAmount+{amount},
-    Username={name},
-    Discriminator={discrim},
-    AvatarId={avatarId}
-WHERE UserId={userId};
-
-INSERT OR IGNORE INTO DiscordUser (UserId, Username, Discriminator, AvatarId, CurrencyAmount)
-VALUES ({userId}, {name}, {discrim}, {avatarId}, {amount});
-");
+                                                        UPDATE DiscordUser
+                                                        SET CurrencyAmount=CurrencyAmount+{amount},
+                                                        Username={name},
+                                                        Discriminator={discrim},
+                                                        AvatarId={avatarId}
+                                                        WHERE UserId={userId}
+                                                        IF @@ROWCOUNT=0
+                                                            INSERT INTO DiscordUser (UserId, Username, Discriminator, AvatarId, CurrencyAmount)
+                                                            VALUES ({userId}, {name}, {discrim}, {avatarId}, {amount});");
             }
+
             return true;
         }
 
         public void CurrencyDecay(float decay, ulong botId)
         {
             _context.Database.ExecuteSqlCommand($@"
-UPDATE DiscordUser
-SET CurrencyAmount=CurrencyAmount-ROUND(CurrencyAmount*{decay}-0.5)
-WHERE CurrencyAmount>0 AND UserId!={botId};");
+                                                    UPDATE DiscordUser
+                                                    SET CurrencyAmount=CurrencyAmount-ROUND(CurrencyAmount*{decay}-0.5)
+                                                    WHERE CurrencyAmount>0 AND UserId!={botId};");
         }
 
         public long GetCurrencyDecayAmount(float decay)
         {
-            return (long)_set.Sum(x => Math.Round(x.CurrencyAmount * decay - 0.5));
+            return (long) _set.Sum(x => Math.Round(x.CurrencyAmount * decay - 0.5));
         }
 
         public decimal GetTotalCurrency()

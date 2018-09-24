@@ -48,13 +48,12 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
             //	LIMIT 1));";
 
             return _set
-                .Where(x => x.GuildId == guildId && ((x.Xp + x.AwardedXp) >
+                .Count(x => x.GuildId == guildId && ((x.Xp + x.AwardedXp) >
                     (_set
                         .Where(y => y.UserId == userId && y.GuildId == guildId)
                         .Select(y => y.Xp + y.AwardedXp)
                         .FirstOrDefault())
-                ))
-                .Count() + 1;
+                )) + 1;
         }
 
         public void ResetGuildUserXp(ulong userId, ulong guildId)

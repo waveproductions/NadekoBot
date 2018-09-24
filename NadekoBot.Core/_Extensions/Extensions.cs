@@ -319,18 +319,15 @@ namespace NadekoBot.Extensions
             sw.Reset();
         }
 
-        public static bool IsImage(this HttpResponseMessage msg) => IsImage(msg, out _);
-
-        public static bool IsImage(this HttpResponseMessage msg, out string mimeType)
+        public static bool IsImage(this HttpResponseMessage msg)
         {
-            mimeType = msg.Content.Headers.ContentType.MediaType;
-            if (mimeType == "image/png"
-                    || mimeType == "image/jpeg"
-                    || mimeType == "image/gif")
+            if (msg.Content.Headers.ContentType.MediaType != "image/png"
+                                && msg.Content.Headers.ContentType.MediaType != "image/jpeg"
+                                && msg.Content.Headers.ContentType.MediaType != "image/gif")
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
 
         public static long? GetImageSize(this HttpResponseMessage msg)

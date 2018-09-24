@@ -128,10 +128,10 @@ namespace NadekoBot.Core.Services.Impl
                 CarbonKey = data[nameof(CarbonKey)];
                 var dbSection = data.GetSection("db");
                 Db = new DBConfig(string.IsNullOrWhiteSpace(dbSection["Type"])
-                                ? "sqlite"
+                                ? "sqlserver"
                                 : dbSection["Type"],
                             string.IsNullOrWhiteSpace(dbSection["ConnectionString"])
-                                ? "Data Source=data/NadekoBot.db"
+                                ? "Data Source=;Initial Catalog=;User ID=;Password="
                                 : dbSection["ConnectionString"]);
 
                 TwitchClientId = data[nameof(TwitchClientId)];
@@ -161,7 +161,7 @@ namespace NadekoBot.Core.Services.Impl
             public string SoundCloudClientId { get; set; } = "";
             public string CleverbotApiKey { get; } = "";
             public string CarbonKey { get; set; } = "";
-            public DBConfig Db { get; set; } = new DBConfig("sqlite", "Data Source=data/NadekoBot.db");
+            public DBConfig Db { get; set; } = new DBConfig("sqlserver", "Data Source=;Initial Catalog=;User ID=;Password=");
             public int TotalShards { get; set; } = 1;
             public string PatreonAccessToken { get; set; } = "";
             public string PatreonCampaignId { get; set; } = "334038";

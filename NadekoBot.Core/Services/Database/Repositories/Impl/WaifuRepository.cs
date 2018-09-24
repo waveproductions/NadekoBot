@@ -92,10 +92,10 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
 
             return _context.Set<WaifuUpdate>()
                 .FromSql($@"SELECT 1 
-FROM WaifuUpdates
-WHERE UserId = (SELECT Id from DiscordUser WHERE UserId={userId}) AND 
-    UpdateType = 0 AND 
-    NewId IS NOT NULL")
+                            FROM WaifuUpdates
+                            WHERE UserId = (SELECT Id from DiscordUser WHERE UserId={userId}) AND 
+                            UpdateType = 0 AND 
+                            NewId IS NOT NULL")
                 .Count();
         }
 
@@ -112,11 +112,11 @@ WHERE UserId = (SELECT Id from DiscordUser WHERE UserId={userId}) AND
                         .Select(u => u.Username + "#" + u.Discriminator)
                         .FirstOrDefault(),
 
-                    AffinityCount = _context.Set<WaifuUpdate>()
-                        .Where(x => x.UserId == w.WaifuId &&
+                    AffinityCount = _context
+                        .Set<WaifuUpdate>()
+                        .Count(x => x.UserId == w.WaifuId &&
                             x.UpdateType == WaifuUpdateType.AffinityChanged &&
-                            x.NewId != null)
-                        .Count(),
+                            x.NewId != null),
 
                     AffinityName = _context.Set<DiscordUser>()
                         .Where(u => u.Id == w.AffinityId)
@@ -124,19 +124,18 @@ WHERE UserId = (SELECT Id from DiscordUser WHERE UserId={userId}) AND
                         .FirstOrDefault(),
 
                     ClaimCount = _set
-                        .Where(x => x.ClaimerId == w.WaifuId)
-                        .Count(),
+                        .Count(x => x.ClaimerId == w.WaifuId),
 
                     ClaimerName = _context.Set<DiscordUser>()
                         .Where(u => u.Id == w.ClaimerId)
                         .Select(u => u.Username + "#" + u.Discriminator)
                         .FirstOrDefault(),
 
-                    DivorceCount = _context.Set<WaifuUpdate>()
-                        .Where(x => x.OldId == w.WaifuId &&
+                    DivorceCount = _context
+                        .Set<WaifuUpdate>()
+                            .Count(x => x.OldId == w.WaifuId &&
                             x.NewId == null &&
-                            x.UpdateType == WaifuUpdateType.Claimed)
-                            .Count(),
+                            x.UpdateType == WaifuUpdateType.Claimed),
 
                     Price = w.Price,
 

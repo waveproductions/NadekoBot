@@ -10,7 +10,7 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
         protected DbContext _context { get; set; }
         protected DbSet<T> _set { get; set; }
 
-        public Repository(DbContext context)
+        protected Repository(DbContext context)
         {
             _context = context;
             _set = context.Set<T>();

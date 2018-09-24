@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using NadekoBot.Core.Services.Database;
@@ -22,17 +21,15 @@ namespace NadekoBot.Core.Services
 
         public DbService(IBotCredentials creds)
         {
-            var builder = new SqliteConnectionStringBuilder(creds.Db.ConnectionString);
-            builder.DataSource = Path.Combine(AppContext.BaseDirectory, builder.DataSource);
-
             var optionsBuilder = new DbContextOptionsBuilder<NadekoContext>()
                 //.UseLoggerFactory(_loggerFactory)
                 ;
-            optionsBuilder.UseSqlite(builder.ToString());
+            optionsBuilder.UseSqlServer(creds.Db.ConnectionString);
+
             options = optionsBuilder.Options;
 
-            optionsBuilder = new DbContextOptionsBuilder<NadekoContext>();
-            optionsBuilder.UseSqlite(builder.ToString(), x => x.SuppressForeignKeyEnforcement());
+            //optionsBuilder = new DbContextOptionsBuilder<NadekoContext>();
+            //optionsBuilder.UseSqlServer(builder.ToString(), x => x.SuppressForeignKeyEnforcement());
             migrateOptions = optionsBuilder.Options;
         }
 
@@ -47,7 +44,6 @@ namespace NadekoBot.Core.Services
                     mContext.SaveChanges();
                     mContext.Dispose();
                 }
-                context.Database.ExecuteSqlCommand("PRAGMA journal_mode=WAL");
                 context.EnsureSeedData();
                 context.SaveChanges();
             }
@@ -59,11 +55,6 @@ namespace NadekoBot.Core.Services
             context.Database.SetCommandTimeout(60);
             var conn = context.Database.GetDbConnection();
             conn.Open();
-            using (var com = conn.CreateCommand())
-            {
-                com.CommandText = "PRAGMA journal_mode=WAL; PRAGMA synchronous=OFF";
-                com.ExecuteNonQuery();
-            }
             return context;
         }
 
