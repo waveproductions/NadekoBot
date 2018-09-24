@@ -52,7 +52,7 @@ Open Your PC terminal and type those commands:
 1. ```cd <directory to the nadekobot where you extracted the archieve>```
 2. ```heroku loging``` and enter your heroku credentials
 3. ```git init```
-4. ```heroku git:remore -a <heroku app name>```
+4. ```heroku git:remote -a <heroku app name>```
 5. ```git add .```
 6. ```git commit -am "init"```
 7. ```git push heroku master```
@@ -64,3 +64,6 @@ After the installation is done go to he application dashboard and click "Configu
 Now you can go to the LogDNA and view logs of your nadeko and look what it's doing
 
 FIN.
+
+## Video How To Setup
+[![ScreenShot](http://i.imgur.com/PaplNYc.png)](https://www.youtube.com/watch?v=BD_NpQpZnzA)
