@@ -2,7 +2,7 @@
 Before you continue, notice that this nadeko uses **Microsoft SQL Server** and you need to have your **own** SQL Server since heroku doesn't provide any.
 Why it uses MSSQL instead of the built-in SQLite? The answer is because of heroku's [**ephemeral filesystem.**](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem)
 
-##Tools That You Need
+## Tools That You Need
 1. [**GIT**](https://git-scm.com/downloads)
 2. [**The Heroku CLI**](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
 
