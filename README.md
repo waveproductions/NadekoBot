@@ -66,4 +66,4 @@ Now you can go to the LogDNA and view logs of your nadeko and look what it's doi
 FIN.
 
 ## Video How To Setup
-[![ScreenShot](http://i.imgur.com/PaplNYc.png)](https://www.youtube.com/watch?v=BD_NpQpZnzA)
+[![ScreenShot](http://i.imgur.com/PaplNYc.png)](https://www.youtube.com/watch?v=Ld1UPdgxikE)
