@@ -25,6 +25,7 @@ Why it uses remote database instead of the built-in SQLite? The answer is becaus
  - ```https://github.com/dubsmash/heroku-buildpack-opus.git```
  - ```https://github.com/appositum/heroku-buildpack-youtube-dl.git```
  - ```https://github.com/ScarletKuro/dotnetcore-buildpackv2.1.git```
+
 **NB! Watch out for extra spaces when copy-pasting.**
 
 
@@ -33,19 +34,19 @@ Why it uses remote database instead of the built-in SQLite? The answer is becaus
 You have two options here: MSSQL or PostgreSQL
 MSSQL option:
 - If you don't have any SQL Server, you can temporary use [**gearhost**](https://www.gearhost.com/). Remember that it has *limited data-size* of 10mb.
-- In **credentials.json** use follow type and connectionstring: ```"Type": "sqlserver",
+- In **credentials.json** use following type and connectionstring: ```"Type": "sqlserver",
     "ConnectionString": "Data Source={address to database};Initial Catalog={database name};User ID={username};Password={password}"```
 
 PostgreSQL option:
  - For using PostgreSQL  you need to have "Heroku Postgres" plugin installed on your dyno. Remember that if you are using free plan you have only *10000 rows* available.
- - In **credentials.json** use follow type and connectionstring: ```    "Type": "pgsql",
+ - In **credentials.json** use following type and connectionstring: ```    "Type": "pgsql",
     "ConnectionString": "Host={address to database};Port={port};Database={database name};Username={username};Password={password};SSL Mode=Require;Trust Server Certificate=true;Maximum Pool Size=20;Keepalive=60"```. Only edit the parameters in {} brackets, don't touch the rest if you don't know what you are doing.
 
  **NB!** *If you are using a domain name to connect to database take a note that some domain names may require a **www** prefix and some doesn't to connect to the database.
 	For example my college SQL Server needs a *www* before the domain name and the gearhost's doesn't as well as heroku postgresql.*
 
 
-To connect to your database I recommend to use [**Database.NET**](https://fishcodelib.com/files/DatabaseNet4.zip) it's a light tool and supports connection to both MSSQL and PostgreSQL  databases.
+To connect to your database I recommend to use [**Database.NET**](https://fishcodelib.com/files/DatabaseNet4.zip) it's a light tool and supports connection for both MSSQL and PostgreSQL databases.
 
 ## Setting Up The Nadeko
 1. On my github go to to the [**release**](https://github.com/ScarletKuro/NadekoBot/releases) and download the **heroku-nadeko-1.9-release.zip**(not the Source code or anything else)
@@ -60,7 +61,7 @@ And the ConnectionString and Type for Database as well, look at the "Setting Up 
 Open Your PC terminal and type those commands:
 
 1. ```cd <directory to the nadekobot where you extracted the archieve>```
-2. ```heroku loging``` and enter your heroku credentials
+2. ```heroku login``` and enter your heroku credentials
 3. ```git init```
 4. ```heroku git:remote -a <heroku app name>```
 5. ```git add .```
