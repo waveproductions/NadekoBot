@@ -1,6 +1,8 @@
+
 ## Explanation
-Before you continue, notice that this nadeko uses **Microsoft SQL Server** and you need to have your **own** SQL Server since heroku doesn't provide any.
-Why it uses MSSQL instead of the built-in SQLite? The answer is because of heroku's [**ephemeral filesystem.**](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem)
+Before you continue, notice that this nadeko uses **Microsoft SQL Server** or **PostgreSQL** .
+If you are going to use MSSQL then you need to have your **own** SQL Server since heroku doesn't provide any. And for PostgreSQL you can install free/paid plugin in heroku. 
+Why it uses remote database instead of the built-in SQLite? The answer is because of heroku's [**ephemeral filesystem.**](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem)
 
 ## Tools That You Need
 1. [**GIT**](https://git-scm.com/downloads)
@@ -11,12 +13,13 @@ Why it uses MSSQL instead of the built-in SQLite? The answer is because of herok
 2. Click on the "New" button in right cornet and select "create new app"
 ![Image of Creating App](https://i.imgur.com/E097TzF.png)
 
-3. Enter unique app name and select region and click "Create app"
-4. Select "Overview" tab and click on "Configure Add-ons"
-5. In the search bar enter "Heroku Redis" and select plan(free) and install the plugin
-6. Same again but now enter "LogDNA"
-7. Click on the "Heroku Redis" plugin and after you will be redirected on redis dashboard click "View Credentials..." you will see host, port, user and password. Write them down somewhere, we will need them later.
-8.Go back to the main heroku dashboard(click on the app if you are on apps list) go to the "Settings" and add those buildpacks:
+3. Enter unique app name and select region and click "Create app".
+4. Select "Overview" tab and click on "Configure Add-ons".
+5. In the search bar enter "Heroku Redis" and select plan(free) and install the plugin.
+6. Same again but now enter "LogDNA".
+7. *If you are going to use PostgreSQL, then install the "Heroku Postgres" too.* If MSSQL then skip this step.
+8. Click on the "Heroku Redis" plugin and after you will be redirected on redis dashboard click "View Credentials..." you will see host, port, user and password. Write them down somewhere, we will need them later.
+9. Go back to the main heroku dashboard(click on the app if you are on apps list) go to the "Settings" and add those buildpacks:
  - ```https://github.com/challengee/heroku-buildpack-libsodium```
  - ```https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git```
  - ```https://github.com/dubsmash/heroku-buildpack-opus.git```
@@ -27,12 +30,22 @@ Why it uses MSSQL instead of the built-in SQLite? The answer is because of herok
 
 
 ## Setting Up The Database
-You need MSSQL Server for this bot:
+You have two options here: MSSQL or PostgreSQL
+MSSQL option:
+- If you don't have any SQL Server, you can temporary use [**gearhost**](https://www.gearhost.com/). Remember that it has *limited data-size* of 10mb.
+- In **credentials.json** use follow type and connectionstring: ```"Type": "sqlserver",
+    "ConnectionString": "Data Source={address to database};Initial Catalog={database name};User ID={username};Password={password}"```
 
-- If you don't have any SQL Server, you can temporary use [**gearhost**](https://www.gearhost.com/). Remember that it has *limited data-size*.
-- To connect to your database I recommend [**Database.NET**](https://fishcodelib.com/files/DatabaseNet4.zip)
+PostgreSQL option:
+ - For using PostgreSQL  you need to have "Heroku Postgres" plugin installed on your dyno. Remember that if you are using free plan you have only *10000 rows* available.
+ - In **credentials.json** use follow type and connectionstring: ```    "Type": "pgsql",
+    "ConnectionString": "Host={address to database};Port={port};Database={database name};Username={username};Password={password};SSL Mode=Require;Trust Server Certificate=true;Maximum Pool Size=20;Keepalive=60"```. Only edit the parameters in {} brackets, don't touch the rest if you don't know what you are doing.
 
-We need credentials from the database, the url/ip where the database located, user, password and the database name.
+ **NB!** *If you are using a domain name to connect to database take a note that some domain names may require a **www** prefix and some doesn't to connect to the database.
+	For example my college SQL Server needs a *www* before the domain name and the gearhost's doesn't as well as heroku postgresql.*
+
+
+To connect to your database I recommend to use [**Database.NET**](https://fishcodelib.com/files/DatabaseNet4.zip) it's a light tool and supports connection to both MSSQL and PostgreSQL  databases.
 
 ## Setting Up The Nadeko
 1. On my github go to to the [**release**](https://github.com/ScarletKuro/NadekoBot/releases) and download the **heroku-nadeko-1.9-release.zip**(not the Source code or anything else)
@@ -40,10 +53,7 @@ We need credentials from the database, the url/ip where the database located, us
 2. Extract the zip archive in a folder
 3. Edit the **credentials.json** the explanation is located [**here**](https://nadekobot.readthedocs.io/en/latest/JSON%20Explanations/#setting-up-credentialsjson-file). But we will need to edit the RedisOptions as well. **{Host}**:**{Port}**, name=**{User}**, password=**{Password}** replace them with credentials from Heroku Redis Dasboard(remove the {} brackets).
 ![Image of RedisOptions](https://i.imgur.com/dipJaQg.png)
-And the ConnectionString for Database as well
-   
- **NB!** *If you are using a domain name to connect to database take a note that some domain names may require a **www** prefix and some doesn't to connect to the database.
-	For example my college SQL Server needs a *www* before the domain name and the gearhost's doesn't.*
+And the ConnectionString and Type for Database as well, look at the "Setting Up The Database" section.
 4. Save
 
 ## Deploying To Heroku
