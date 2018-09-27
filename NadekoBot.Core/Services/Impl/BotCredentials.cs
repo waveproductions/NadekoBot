@@ -131,7 +131,7 @@ namespace NadekoBot.Core.Services.Impl
                                 ? "sqlserver"
                                 : dbSection["Type"],
                             string.IsNullOrWhiteSpace(dbSection["ConnectionString"])
-                                ? "Data Source=;Initial Catalog=;User ID=;Password="
+                                ? "Server=(localdb)\\mssqllocaldb;Database=NadekoBot;Trusted_Connection=True;"
                                 : dbSection["ConnectionString"]);
 
                 TwitchClientId = data[nameof(TwitchClientId)];
@@ -161,7 +161,7 @@ namespace NadekoBot.Core.Services.Impl
             public string SoundCloudClientId { get; set; } = "";
             public string CleverbotApiKey { get; } = "";
             public string CarbonKey { get; set; } = "";
-            public DBConfig Db { get; set; } = new DBConfig("sqlserver", "Data Source=;Initial Catalog=;User ID=;Password=");
+            public DBConfig Db { get; set; } = new DBConfig("pgsql", "Host={address to database};Port={port};Database={database name};Username={username};Password={password};SSL Mode=Require;Trust Server Certificate=true;Maximum Pool Size=20;Keepalive=60");
             public int TotalShards { get; set; } = 1;
             public string PatreonAccessToken { get; set; } = "";
             public string PatreonCampaignId { get; set; } = "334038";
@@ -177,7 +177,7 @@ namespace NadekoBot.Core.Services.Impl
             public string TwitchClientId { get; set; }
             public string VotesToken { get; set; }
             public string VotesUrl { get; set; }
-            public string RedisOptions { get; set; } = "{Host}:{Port}, name={User}, password={Password}, syncTimeout=30000";
+            public string RedisOptions { get; set; } = "{Host}:{Port}, name={User}, password={Password}, syncTimeout=100000";
         }
 
         public bool IsOwner(IUser u) => OwnerIds.Contains(u.Id);
