@@ -102,8 +102,16 @@ namespace NadekoBot.Modules.Utility.Services
             {
                 using (var uow = _db.UnitOfWork)
                 {
-                    uow._context.Database.ExecuteSqlCommand($"DELETE FROM Reminders WHERE Id={r.Id};");
-                    uow.Complete();
+                    if (uow._context.Database.IsNpgsql())
+                    {
+                        uow._context.Database.ExecuteSqlCommand($"DELETE FROM \"Reminders\" WHERE \"Id\"={r.Id};");
+                        uow.Complete();
+                    }
+                    if (uow._context.Database.IsSqlServer())
+                    {
+                        uow._context.Database.ExecuteSqlCommand($"DELETE FROM Reminders WHERE Id={r.Id};");
+                        uow.Complete();
+                    }
                 }
                 RemoveReminder(r.Id);
             }

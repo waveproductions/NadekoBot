@@ -58,12 +58,28 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
 
         public void ResetGuildUserXp(ulong userId, ulong guildId)
         {
-            _context.Database.ExecuteSqlCommand($"DELETE FROM UserXpStats WHERE UserId={userId} AND GuildId={guildId};");
+            if (_context.Database.IsNpgsql())
+            {
+                _context.Database.ExecuteSqlCommand($"DELETE FROM \"UserXpStats\" WHERE \"UserId\"={userId} AND \"GuildId\"={guildId};");
+            }
+
+            if (_context.Database.IsSqlServer())
+            {
+                _context.Database.ExecuteSqlCommand($"DELETE FROM UserXpStats WHERE UserId={userId} AND GuildId={guildId};");
+            }
         }
 
         public void ResetGuildXp(ulong guildId)
         {
-            _context.Database.ExecuteSqlCommand($"DELETE FROM UserXpStats WHERE GuildId={guildId};");
+            if (_context.Database.IsNpgsql())
+            {
+                _context.Database.ExecuteSqlCommand($"DELETE FROM \"UserXpStats\" WHERE \"GuildId\"={guildId};");
+            }
+
+            if (_context.Database.IsSqlServer())
+            {
+                _context.Database.ExecuteSqlCommand($"DELETE FROM UserXpStats WHERE GuildId={guildId};");
+            }
         }
     }
 }

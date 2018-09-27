@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WebApp1.Migrations
 {
@@ -13,7 +14,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     BufferSize = table.Column<ulong>(nullable: false),
                     ForwardMessages = table.Column<bool>(nullable: false),
@@ -72,7 +74,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Amount = table.Column<long>(nullable: false),
                     Reason = table.Column<string>(nullable: true),
@@ -88,7 +91,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildId = table.Column<ulong>(nullable: true),
                     Response = table.Column<string>(nullable: true),
@@ -110,7 +114,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     LogOtherId = table.Column<ulong>(nullable: true),
                     MessageUpdatedId = table.Column<ulong>(nullable: true),
@@ -154,7 +159,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Author = table.Column<string>(nullable: true),
@@ -170,7 +176,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     NextId = table.Column<int>(nullable: true),
                     PrimaryTarget = table.Column<int>(nullable: false),
@@ -195,7 +202,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Amount = table.Column<long>(nullable: false),
                     Password = table.Column<string>(nullable: true),
@@ -214,7 +222,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildId = table.Column<ulong>(nullable: false),
                     ChannelId = table.Column<ulong>(nullable: false),
@@ -230,7 +239,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildId = table.Column<ulong>(nullable: false),
                     Keyword = table.Column<string>(nullable: false),
@@ -249,7 +259,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     When = table.Column<DateTime>(nullable: false),
                     ChannelId = table.Column<ulong>(nullable: false),
@@ -268,7 +279,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     PatreonUserId = table.Column<string>(nullable: true),
@@ -285,7 +297,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildId = table.Column<ulong>(nullable: false),
                     RoleId = table.Column<ulong>(nullable: false),
@@ -302,7 +315,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     Amount = table.Column<long>(nullable: false),
@@ -318,7 +332,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     GuildId = table.Column<ulong>(nullable: false),
@@ -337,7 +352,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildId = table.Column<ulong>(nullable: false),
                     UserId = table.Column<ulong>(nullable: false),
@@ -356,7 +372,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     ItemId = table.Column<ulong>(nullable: false),
                     Type = table.Column<int>(nullable: false),
@@ -378,7 +395,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     BotConfigId = table.Column<int>(nullable: true),
@@ -406,7 +424,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Text = table.Column<string>(nullable: true),
                     BotConfigId = table.Column<int>(nullable: true)
@@ -427,7 +446,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Status = table.Column<string>(nullable: true),
                     Type = table.Column<int>(nullable: false, defaultValue: 0),
@@ -449,7 +469,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Icon = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
@@ -471,7 +492,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Index = table.Column<int>(nullable: false),
                     CommandText = table.Column<string>(nullable: true),
@@ -500,7 +522,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     LogSettingId = table.Column<int>(nullable: true),
                     ChannelId = table.Column<ulong>(nullable: false)
@@ -521,7 +544,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     LogSettingId = table.Column<int>(nullable: true),
                     ChannelId = table.Column<ulong>(nullable: false)
@@ -542,7 +566,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Provider = table.Column<string>(nullable: true),
                     ProviderType = table.Column<int>(nullable: false),
@@ -567,7 +592,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildId = table.Column<ulong>(nullable: false),
                     Prefix = table.Column<string>(nullable: true),
@@ -627,7 +653,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Index = table.Column<int>(nullable: false),
                     Text = table.Column<string>(nullable: true),
@@ -649,7 +676,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     VoteIndex = table.Column<int>(nullable: false),
@@ -671,7 +699,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: false),
                     UserThreshold = table.Column<int>(nullable: false),
@@ -694,7 +723,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: false),
                     Action = table.Column<int>(nullable: false),
@@ -717,7 +747,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Trigger = table.Column<string>(nullable: true),
                     Mapping = table.Column<string>(nullable: true),
@@ -739,7 +770,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Seconds = table.Column<int>(nullable: false),
                     CommandName = table.Column<string>(nullable: true),
@@ -761,7 +793,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     ChannelId = table.Column<ulong>(nullable: false),
                     State = table.Column<bool>(nullable: false),
@@ -783,7 +816,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: false),
                     ChannelId = table.Column<ulong>(nullable: false),
@@ -806,7 +840,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     ChannelId = table.Column<ulong>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true),
@@ -834,7 +869,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Word = table.Column<string>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: true)
@@ -855,7 +891,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     ChannelId = table.Column<ulong>(nullable: false),
                     Username = table.Column<string>(nullable: true),
@@ -880,7 +917,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: true),
                     ChannelId = table.Column<ulong>(nullable: false)
@@ -901,7 +939,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: false),
                     Number = table.Column<int>(nullable: false),
@@ -923,7 +962,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildId = table.Column<ulong>(nullable: false),
                     ChannelId = table.Column<ulong>(nullable: false),
@@ -950,7 +990,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: false),
                     SongAutoDelete = table.Column<bool>(nullable: false),
@@ -972,7 +1013,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true)
@@ -993,7 +1035,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Tag = table.Column<string>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: true)
@@ -1014,7 +1057,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: true),
                     Index = table.Column<int>(nullable: false),
@@ -1041,7 +1085,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Index = table.Column<int>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: false),
@@ -1065,7 +1110,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Index = table.Column<int>(nullable: false),
                     Price = table.Column<int>(nullable: false),
@@ -1092,7 +1138,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     RoleId = table.Column<ulong>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true)
@@ -1113,7 +1160,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     GuildConfigId = table.Column<int>(nullable: true)
@@ -1134,7 +1182,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: false),
                     Enabled = table.Column<bool>(nullable: false, defaultValue: false),
@@ -1158,7 +1207,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     UnbanAt = table.Column<DateTime>(nullable: false),
@@ -1180,7 +1230,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     UnmuteAt = table.Column<DateTime>(nullable: false),
@@ -1202,7 +1253,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     VoiceChannelId = table.Column<ulong>(nullable: false),
                     RoleId = table.Column<ulong>(nullable: false),
@@ -1224,7 +1276,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Count = table.Column<int>(nullable: false),
                     Punishment = table.Column<int>(nullable: false),
@@ -1247,7 +1300,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     GuildConfigId = table.Column<int>(nullable: false),
                     XpRoleRewardExclusive = table.Column<bool>(nullable: false),
@@ -1270,7 +1324,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     ChannelId = table.Column<ulong>(nullable: false),
                     AntiSpamSettingId = table.Column<int>(nullable: true)
@@ -1291,7 +1346,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     EmoteName = table.Column<string>(nullable: true),
                     RoleId = table.Column<ulong>(nullable: false),
@@ -1313,7 +1369,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Text = table.Column<string>(nullable: true),
                     ShopEntryId = table.Column<int>(nullable: true)
@@ -1334,7 +1391,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     Username = table.Column<string>(nullable: true),
@@ -1356,7 +1414,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     Username = table.Column<string>(nullable: true),
@@ -1378,7 +1437,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     ItemId = table.Column<ulong>(nullable: false),
                     ItemType = table.Column<int>(nullable: false),
@@ -1400,7 +1460,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     XpSettingsId = table.Column<int>(nullable: false),
                     Level = table.Column<int>(nullable: false),
@@ -1422,7 +1483,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     XpSettingsId = table.Column<int>(nullable: false),
                     Level = table.Column<int>(nullable: false),
@@ -1468,7 +1530,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<ulong>(nullable: false),
                     Username = table.Column<string>(nullable: true),
@@ -1493,7 +1556,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 20, nullable: false),
                     Discrim = table.Column<int>(nullable: false),
@@ -1520,7 +1584,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     WaifuId = table.Column<int>(nullable: false),
                     ClaimerId = table.Column<int>(nullable: true),
@@ -1555,7 +1620,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
                     UpdateType = table.Column<int>(nullable: false),
@@ -1590,7 +1656,8 @@ namespace WebApp1.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     DateAdded = table.Column<DateTime>(nullable: true),
                     WaifuInfoId = table.Column<int>(nullable: true),
                     ItemEmoji = table.Column<string>(nullable: true),
@@ -1788,8 +1855,7 @@ namespace WebApp1.Migrations
                 name: "IX_Permission_NextId",
                 table: "Permission",
                 column: "NextId",
-                unique: true,
-                filter: "[NextId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Permissionv2_GuildConfigId",

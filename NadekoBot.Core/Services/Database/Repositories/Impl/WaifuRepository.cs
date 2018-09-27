@@ -89,14 +89,30 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
             //           .Count(w => w.User.UserId == userId &&
             //               w.UpdateType == WaifuUpdateType.AffinityChanged &&
             //               w.New != null));
+            if (_context.Database.IsNpgsql())
+            {
+                return _context.Set<WaifuUpdate>()
+                    .FromSql($@"SELECT 1 
+                            FROM ""WaifuUpdates""
+                            WHERE ""UserId"" = (SELECT ""Id"" from ""DiscordUser"" WHERE ""UserId""={userId}) AND 
+                            ""UpdateType"" = 0 AND 
+                            ""NewId"" IS NOT NULL")
+                    .Count();
+            }
 
-            return _context.Set<WaifuUpdate>()
-                .FromSql($@"SELECT 1 
+
+            if (_context.Database.IsSqlServer())
+            {
+                return _context.Set<WaifuUpdate>()
+                    .FromSql($@"SELECT 1 
                             FROM WaifuUpdates
                             WHERE UserId = (SELECT Id from DiscordUser WHERE UserId={userId}) AND 
                             UpdateType = 0 AND 
                             NewId IS NOT NULL")
-                .Count();
+                    .Count();
+            }
+
+            return default(int);
         }
 
         public WaifuInfoStats GetWaifuInfo(ulong userId)

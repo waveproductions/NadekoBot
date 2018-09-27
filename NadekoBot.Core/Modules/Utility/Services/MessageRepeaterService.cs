@@ -60,8 +60,17 @@ namespace NadekoBot.Modules.Utility.Services
         {
             using (var uow = _db.UnitOfWork)
             {
-                uow._context.Database.ExecuteSqlCommand($@"UPDATE GuildRepeater SET 
+                if (uow._context.Database.IsNpgsql())
+                {
+                    uow._context.Database.ExecuteSqlCommand($@"UPDATE ""GuildRepeater"" SET 
+                    ""LastMessageId""={lastMsgId} WHERE ""Id""={repeaterId}");
+                }
+                if (uow._context.Database.IsSqlServer())
+                {
+                    uow._context.Database.ExecuteSqlCommand($@"UPDATE GuildRepeater SET 
                     LastMessageId={lastMsgId} WHERE Id={repeaterId}");
+                }
+                
             }
         }
     }

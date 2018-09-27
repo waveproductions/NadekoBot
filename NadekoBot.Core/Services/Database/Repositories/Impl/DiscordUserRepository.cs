@@ -15,7 +15,20 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
 
         public void EnsureCreated(ulong userId, string username, string discrim, string avatarId)
         {
-            _context.Database.ExecuteSqlCommand($@"
+            if (_context.Database.IsNpgsql())
+            {
+                _context.Database.ExecuteSqlCommand($@"
+                                                        INSERT INTO ""DiscordUser"" (""UserId"", ""Username"", ""Discriminator"", ""AvatarId"")
+                                                        VALUES ({userId}, {username}, {discrim}, {avatarId})
+                                                        ON CONFLICT(""UserId"") DO UPDATE
+                                                        SET ""Username""={username},
+                                                        ""Discriminator""={discrim},
+                                                        ""AvatarId""={avatarId};");
+            }
+
+            if (_context.Database.IsSqlServer())
+            {
+                _context.Database.ExecuteSqlCommand($@"
                                                     UPDATE DiscordUser
                                                     SET Username={username},
                                                     Discriminator={discrim},
@@ -24,6 +37,7 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
                                                     IF @@ROWCOUNT=0
                                                         INSERT INTO DiscordUser (UserId, Username, Discriminator, AvatarId)
                                                         VALUES ({userId}, {username}, {discrim}, {avatarId});");
+            }
         }
 
         //temp is only used in updatecurrencystate, so that i don't overwrite real usernames/discrims with Unknown
@@ -88,21 +102,45 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
             // and return number of rows > 0 (was there a change)
             if (amount < 0 && !allowNegative)
             {
-                var rows = _context.Database.ExecuteSqlCommand($@"
+                if (_context.Database.IsNpgsql())
+                {
+                    var rows = _context.Database.ExecuteSqlCommand($@"
+                                                                    UPDATE ""DiscordUser""
+                                                                    SET ""CurrencyAmount""=""DiscordUser"".""CurrencyAmount""+{amount}
+                                                                    WHERE ""UserId""={userId} AND ""CurrencyAmount"">={-amount};");
+                    return rows > 0;
+                }
+
+                if (_context.Database.IsSqlServer())
+                {
+                    var rows = _context.Database.ExecuteSqlCommand($@"
                                                                     UPDATE DiscordUser
                                                                     SET CurrencyAmount=CurrencyAmount+{amount}
                                                                     WHERE UserId={userId} AND CurrencyAmount>={-amount};");
-                return rows > 0;
+                    return rows > 0;
+                }
             }
 
             // if remove and negative is allowed, just remove without any condition
             if (amount < 0 && allowNegative)
             {
-                var rows = _context.Database.ExecuteSqlCommand($@"
+                if (_context.Database.IsNpgsql())
+                {
+                    var rows = _context.Database.ExecuteSqlCommand($@"
+                                                                    UPDATE ""DiscordUser""
+                                                                    SET ""CurrencyAmount""=""DiscordUser"".""CurrencyAmount""+{amount}
+                                                                    WHERE ""UserId""={userId};");
+                    return rows > 0;
+                }
+
+                if (_context.Database.IsSqlServer())
+                {
+                    var rows = _context.Database.ExecuteSqlCommand($@"
                                                                     UPDATE DiscordUser
                                                                     SET CurrencyAmount=CurrencyAmount+{amount}
                                                                     WHERE UserId={userId};");
-                return rows > 0;
+                    return rows > 0;
+                }
             }
 
             // if add - create a new user with default values if it doesn't exist
@@ -116,17 +154,43 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
             // just update the amount, there is no new user data
             if (!updatedUserData)
             {
-                _context.Database.ExecuteSqlCommand($@"
+                if (_context.Database.IsNpgsql())
+                {
+                    _context.Database.ExecuteSqlCommand($@"
+                                                        INSERT INTO ""DiscordUser"" (""UserId"", ""Username"", ""Discriminator"", ""AvatarId"", ""CurrencyAmount"")
+                                                        VALUES ({userId}, {name}, {discrim}, {avatarId}, {amount})
+                                                        ON CONFLICT(""UserId"") DO UPDATE
+                                                        SET ""CurrencyAmount""=""DiscordUser"".""CurrencyAmount""+{amount};");
+                }
+
+                if (_context.Database.IsSqlServer())
+                {
+                    _context.Database.ExecuteSqlCommand($@"
                                                         UPDATE DiscordUser
                                                         SET CurrencyAmount=CurrencyAmount+{amount}
                                                         WHERE UserId={userId}
                                                         IF @@ROWCOUNT=0
                                                             INSERT INTO DiscordUser (UserId, Username, Discriminator, AvatarId, CurrencyAmount)
                                                             VALUES ({userId}, {name}, {discrim}, {avatarId}, {amount});");
+                }
             }
             else
             {
-                _context.Database.ExecuteSqlCommand($@"
+                if (_context.Database.IsNpgsql())
+                {
+                    _context.Database.ExecuteSqlCommand($@"
+                                                        INSERT INTO ""DiscordUser"" (""UserId"", ""Username"", ""Discriminator"", ""AvatarId"", ""CurrencyAmount"")
+                                                        VALUES ({userId}, {name}, {discrim}, {avatarId}, {amount})
+                                                        ON CONFLICT(""UserId"") DO UPDATE
+                                                        SET ""CurrencyAmount""=""DiscordUser"".""CurrencyAmount"",
+                                                        ""Username""={name},
+                                                        ""Discriminator""={discrim},
+                                                        ""AvatarId""={avatarId};");
+                }
+
+                if (_context.Database.IsSqlServer())
+                {
+                    _context.Database.ExecuteSqlCommand($@"
                                                         UPDATE DiscordUser
                                                         SET CurrencyAmount=CurrencyAmount+{amount},
                                                         Username={name},
@@ -136,6 +200,7 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
                                                         IF @@ROWCOUNT=0
                                                             INSERT INTO DiscordUser (UserId, Username, Discriminator, AvatarId, CurrencyAmount)
                                                             VALUES ({userId}, {name}, {discrim}, {avatarId}, {amount});");
+                }
             }
 
             return true;
@@ -143,10 +208,21 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
 
         public void CurrencyDecay(float decay, ulong botId)
         {
-            _context.Database.ExecuteSqlCommand($@"
+            if (_context.Database.IsNpgsql())
+            {
+                _context.Database.ExecuteSqlCommand($@"
+                                                    UPDATE ""DiscordUser""
+                                                    SET ""CurrencyAmount""=""DiscordUser"".""CurrencyAmount"" - ROUND(""DiscordUser"".""CurrencyAmount""*{decay}-0.5)
+                                                    WHERE ""CurrencyAmount"" > 0 AND ""UserId""!={botId};");
+            }
+
+            if (_context.Database.IsSqlServer())
+            {
+                _context.Database.ExecuteSqlCommand($@"
                                                     UPDATE DiscordUser
                                                     SET CurrencyAmount=CurrencyAmount-ROUND(CurrencyAmount*{decay}-0.5)
                                                     WHERE CurrencyAmount>0 AND UserId!={botId};");
+            }
         }
 
         public long GetCurrencyDecayAmount(float decay)

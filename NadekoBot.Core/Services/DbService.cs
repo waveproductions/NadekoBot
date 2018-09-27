@@ -24,7 +24,15 @@ namespace NadekoBot.Core.Services
             var optionsBuilder = new DbContextOptionsBuilder<NadekoContext>()
                 //.UseLoggerFactory(_loggerFactory)
                 ;
-            optionsBuilder.UseSqlServer(creds.Db.ConnectionString);
+
+            if (creds.Db.Type.ToLower() == "sqlserver")
+            {
+                optionsBuilder.UseSqlServer(creds.Db.ConnectionString);
+            }
+            else
+            {
+                optionsBuilder.UseNpgsql(creds.Db.ConnectionString);
+            }
 
             options = optionsBuilder.Options;
 

@@ -177,7 +177,7 @@ namespace NadekoBot.Core.Services.Impl
             public string TwitchClientId { get; set; }
             public string VotesToken { get; set; }
             public string VotesUrl { get; set; }
-            public string RedisOptions { get; set; }
+            public string RedisOptions { get; set; } = "{Host}:{Port}, name={User}, password={Password}, syncTimeout=30000";
         }
 
         public bool IsOwner(IUser u) => OwnerIds.Contains(u.Id);

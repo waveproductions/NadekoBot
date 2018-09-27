@@ -16,7 +16,14 @@ namespace NadekoBot.Core.Services.Database
         {
             var optionsBuilder = new DbContextOptionsBuilder<NadekoContext>();
             IBotCredentials creds = new BotCredentials();
-            optionsBuilder.UseSqlServer(creds.Db.ConnectionString);
+            if (creds.Db.Type.ToLower() == "sqlserver")
+            {
+                optionsBuilder.UseSqlServer(creds.Db.ConnectionString);
+            }
+            else
+            {
+                optionsBuilder.UseNpgsql(creds.Db.ConnectionString);
+            }
             var ctx = new NadekoContext(optionsBuilder.Options);
             ctx.Database.SetCommandTimeout(60);
             return ctx;
