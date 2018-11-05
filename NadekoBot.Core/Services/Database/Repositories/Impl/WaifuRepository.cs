@@ -117,9 +117,28 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
 
         public WaifuInfoStats GetWaifuInfo(ulong userId)
         {
-            _context.Database.ExecuteSqlCommand($@"
-INSERT OR IGNORE INTO WaifuInfo (AffinityId, ClaimerId, Price, WaifuId)
-VALUES ({null}, {null}, {1}, (SELECT Id FROM DiscordUser WHERE UserId={userId}));");
+            if (_context.Database.IsNpgsql())
+            {
+                _context.Database.ExecuteSqlCommand($@"
+                    INSERT INTO ""WaifuInfo"" (""AffinityId"", ""ClaimerId"", ""Price"", ""WaifuId"")
+                    VALUES ({null}, {null}, {1}, (SELECT ""Id"" FROM ""DiscordUser"" WHERE ""UserId""={userId}))
+                    ON CONFLICT (""WaifuId"") DO NOTHING;");
+            }
+
+            if (_context.Database.IsSqlServer())
+            {
+                IQueryable<DiscordUser> userQueryable = _context.Set<DiscordUser>()
+                    .FromSql($@"SELECT * FROM DiscordUser WHERE UserId={userId}");
+
+                DiscordUser user = userQueryable.FirstOrDefault();
+                if (user != null)
+                {
+                    _context.Database.ExecuteSqlCommand($@"
+                        INSERT INTO WaifuInfo WITH (ROWLOCK) (AffinityId, ClaimerId, Price, WaifuId)
+                        SELECT null, null, 1, {user.Id}
+                        WHERE NOT EXISTS (SELECT * FROM WaifuInfo WHERE WaifuId={user.Id});");
+                }
+            }
 
             return _set
                 .Where(w => w.WaifuId == _context.Set<DiscordUser>()

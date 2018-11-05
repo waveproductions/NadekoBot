@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NadekoBot.Core.Services.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace WebApp1.Migrations
+namespace NadekoBot.Migrations
 {
     [DbContext(typeof(NadekoContext))]
     [Migration("20180923191508_init")]

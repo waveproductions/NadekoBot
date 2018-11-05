@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NadekoBot.Core.Services.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace WebApp1.Migrations
+namespace NadekoBot.Migrations
 {
     [DbContext(typeof(NadekoContext))]
     partial class NadekoContextModelSnapshot : ModelSnapshot
