@@ -1,5 +1,5 @@
 # Easy way to deploy on heroku with one click
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://dashboard.heroku.com/new-app?template=https://github.com/ScarletKuro/NadekoBot-Heroku-Auto-Deploy)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://dashboard.heroku.com/new-app?template=https://github.com/ScarletKuro/NadekoBot-Heroku-Auto-Deploy)(click the button)
 
 **NB!** This will deploy with using heroku's postgresql, if you need mssql use the manual method, if you need to use your custom postgresql its enough to just change the postgresql URI in the enviroments(Settings->Config Vars).
 
