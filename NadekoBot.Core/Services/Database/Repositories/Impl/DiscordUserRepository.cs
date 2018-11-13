@@ -182,7 +182,7 @@ namespace NadekoBot.Core.Services.Database.Repositories.Impl
                                                         INSERT INTO ""DiscordUser"" (""UserId"", ""Username"", ""Discriminator"", ""AvatarId"", ""CurrencyAmount"")
                                                         VALUES ({userId}, {name}, {discrim}, {avatarId}, {amount})
                                                         ON CONFLICT(""UserId"") DO UPDATE
-                                                        SET ""CurrencyAmount""=""DiscordUser"".""CurrencyAmount"",
+                                                        SET ""CurrencyAmount""=""DiscordUser"".""CurrencyAmount""+{amount},
                                                         ""Username""={name},
                                                         ""Discriminator""={discrim},
                                                         ""AvatarId""={avatarId};");
