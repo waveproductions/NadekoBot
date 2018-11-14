@@ -3,7 +3,7 @@
 
 **NB!** This will deploy with using heroku's postgresql, if you need mssql use the manual method, if you need to use your custom postgresql its enough to just change the postgresql URI in the enviroments(Settings->Config Vars).
 
-# Below guide is a manual deploymed method
+# Below guide is a manual deployment method
 
 ## Explanation
 Before you continue, notice that this nadeko uses **Microsoft SQL Server** or **PostgreSQL**.
