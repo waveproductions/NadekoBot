@@ -2,31 +2,26 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NadekoBot.Core.Services.Database;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace NadekoBot.Migrations
 {
     [DbContext(typeof(NadekoContext))]
-    partial class NadekoContextModelSnapshot : ModelSnapshot
+    [Migration("20181210215935_remove-patreonrewards")]
+    partial class removepatreonrewards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846");
 
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.AntiRaidSetting", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Action");
 
@@ -49,9 +44,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.AntiSpamIgnore", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("AntiSpamSettingId");
 
@@ -69,9 +62,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.AntiSpamSetting", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Action");
 
@@ -94,9 +85,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.BlacklistItem", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("BotConfigId");
 
@@ -116,9 +105,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.BlockedCmdOrMdl", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("BotConfigId");
 
@@ -140,9 +127,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.BotConfig", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<float>("BetflipMultiplier");
 
@@ -284,9 +269,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.ClubInfo", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -319,9 +302,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.CommandAlias", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -341,9 +322,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.CommandCooldown", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("CommandName");
 
@@ -363,9 +342,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.CurrencyTransaction", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<long>("Amount");
 
@@ -385,9 +362,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.CustomReaction", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("AutoDeleteTrigger");
 
@@ -417,9 +392,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.DelMsgOnCmdChannel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -439,9 +412,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.DiscordUser", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("AvatarId");
 
@@ -487,9 +458,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.EightBallResponse", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("BotConfigId");
 
@@ -507,9 +476,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.ExcludedItem", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -529,9 +496,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.FeedSub", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -552,9 +517,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.FilterChannelId", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -576,9 +539,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.FilteredWord", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -596,9 +557,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.FollowedStream", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -624,9 +583,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.GCChannelId", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -644,9 +601,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.GroupName", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -667,9 +622,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.GuildConfig", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("AutoAssignRoleId");
 
@@ -758,9 +711,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.IgnoredLogChannel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -778,9 +729,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.IgnoredVoicePresenceChannel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -798,9 +747,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.LogSetting", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("ChannelCreated");
 
@@ -874,9 +821,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.MusicPlaylist", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Author");
 
@@ -894,9 +839,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.MusicSettings", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -917,9 +860,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.MutedUserId", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -937,9 +878,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.NsfwBlacklitedTag", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -957,9 +896,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.Permission", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -986,9 +923,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.Permissionv2", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1018,9 +953,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.PlantedCurrency", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<long>("Amount");
 
@@ -1049,9 +982,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.PlayingStatus", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("BotConfigId");
 
@@ -1071,9 +1002,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.PlaylistSong", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1099,9 +1028,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.Poll", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -1122,9 +1049,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.PollAnswer", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1144,9 +1069,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.PollVote", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1166,9 +1089,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.Quote", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("AuthorId");
 
@@ -1199,9 +1120,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.RaceAnimal", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("BotConfigId");
 
@@ -1221,9 +1140,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.ReactionRole", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1243,9 +1160,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.ReactionRoleMessage", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -1269,9 +1184,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.Reminder", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -1297,9 +1210,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.Repeater", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("ChannelId");
 
@@ -1326,37 +1237,10 @@ namespace NadekoBot.Migrations
                     b.ToTable("GuildRepeater");
                 });
 
-            modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.RewardedUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
-
-                    b.Property<int>("AmountRewardedThisMonth");
-
-                    b.Property<DateTime?>("DateAdded");
-
-                    b.Property<DateTime>("LastReward");
-
-                    b.Property<string>("PatreonUserId");
-
-                    b.Property<ulong>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatreonUserId")
-                        .IsUnique();
-
-                    b.ToTable("RewardedUsers");
-                });
-
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.SelfAssignedRole", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1381,9 +1265,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.ShopEntry", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("AuthorId");
 
@@ -1413,9 +1295,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.ShopEntryItem", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1433,9 +1313,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.SlowmodeIgnoredRole", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1453,9 +1331,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.SlowmodeIgnoredUser", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1473,9 +1349,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.Stake", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<long>("Amount");
 
@@ -1493,9 +1367,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.StartupCommand", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("BotConfigId");
 
@@ -1529,9 +1401,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.StreamRoleBlacklistedUser", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1551,9 +1421,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.StreamRoleSettings", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<ulong>("AddRoleId");
 
@@ -1578,9 +1446,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.StreamRoleWhitelistedUser", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1600,9 +1466,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.UnbanTimer", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1622,9 +1486,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.UnmuteTimer", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1644,9 +1506,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.UserXpStats", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AwardedXp");
 
@@ -1683,9 +1543,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.VcRoleInfo", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1705,9 +1563,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.WaifuInfo", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("AffinityId");
 
@@ -1736,9 +1592,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.WaifuItem", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1760,9 +1614,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.WaifuUpdate", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1788,9 +1640,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.Warning", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1820,9 +1670,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.WarningPunishment", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Count");
 
@@ -1844,9 +1692,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.XpCurrencyReward", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Amount");
 
@@ -1866,9 +1712,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.XpRoleReward", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1889,9 +1733,7 @@ namespace NadekoBot.Migrations
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.XpSettings", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("DateAdded");
 
@@ -1962,7 +1804,7 @@ namespace NadekoBot.Migrations
                     b.HasOne("NadekoBot.Core.Services.Database.Models.DiscordUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.ClubBans", b =>
@@ -1975,7 +1817,7 @@ namespace NadekoBot.Migrations
                     b.HasOne("NadekoBot.Core.Services.Database.Models.DiscordUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("NadekoBot.Core.Services.Database.Models.ClubInfo", b =>

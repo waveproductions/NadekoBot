@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using NadekoBot.Core.Services.Database.Models;
+using NadekoBot.Core.Services.Impl;
 using NadekoBot.Extensions;
 using System;
-using Microsoft.EntityFrameworkCore.Design;
+using System.Collections.Generic;
 using System.IO;
-using NadekoBot.Core.Services.Impl;
+using System.Linq;
 
 namespace NadekoBot.Core.Services.Database
 {
@@ -32,11 +32,12 @@ namespace NadekoBot.Core.Services.Database
 
     public class NadekoContext : DbContext
     {
-        public DbSet<Quote> Quotes { get; set; }
+        public DbSet<BotConfig> BotConfig { get; set; }
         public DbSet<GuildConfig> GuildConfigs { get; set; }
+
+        public DbSet<Quote> Quotes { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
         public DbSet<SelfAssignedRole> SelfAssignableRoles { get; set; }
-        public DbSet<BotConfig> BotConfig { get; set; }
         public DbSet<MusicPlaylist> MusicPlaylists { get; set; }
         public DbSet<CustomReaction> CustomReactions { get; set; }
         public DbSet<CurrencyTransaction> CurrencyTransactions { get; set; }
@@ -252,7 +253,7 @@ namespace NadekoBot.Core.Services.Database
 
             #region PatreonRewards
             var pr = modelBuilder.Entity<RewardedUser>();
-            pr.HasIndex(x => x.UserId)
+            pr.HasIndex(x => x.PatreonUserId)
                 .IsUnique();
             #endregion
 

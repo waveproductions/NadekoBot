@@ -1,6 +1,6 @@
 # Setting up NadekoBot on Docker
 
-Nadeko is written in C# and Discord.Net. For more information visit <https://github.com/Kwoth/NadekoBot>
+Nadeko is written in C# and Discord.Net. For more information visit <https://gitlab.com/Kwoth/nadekobot>
 
 ## Before you start
 
@@ -41,7 +41,7 @@ docker rm temp_nadeko
 echo Your blank credentials.json has been downloaded here: %TEMP%\credentials.json
 ```
 
-### Linux and other *NIX systems
+### Linux and other \*NIX systems
 
 - Open your favorite terminal
 - Copy/paste the following commands
@@ -69,7 +69,7 @@ This step-by-step will assume you choose %LOCALAPPDATA%\Nadeko to store the Nade
 ```powershell
 # you can modify thoses variables
 $workdir="$env:LOCALAPPDATA\Nadeko"
-$url_dc="https://raw.githubusercontent.com/Kwoth/NadekoBot/1.9/docker-compose.yml"
+$url_dc="https://gitlab.com/Kwoth/nadekobot/raw/1.9/docker-compose.yml"
 
 # please do not modify thoses variables
 $dc="$workdir\docker-compose.yml"
@@ -81,7 +81,7 @@ If (!(Test-Path "$workdir")) {
 Invoke-WebRequest -Uri "$url_dc" -OutFile "$dc"
 cat "$dc" | %{ $_ -replace '#image: kwoth','image: kwoth' } | %{ $_ -replace 'build:','#build:' } > "$dc.tmp"
 Move-Item "$dc.tmp" "$dc" -Force
-cat "$dc" | %{ $_ -replace '- ./([^:]*):', "- `"$workdir\`$1`":" } > "$dc.tmp"
+cat "$dc" | %{ $_ -replace '- ./([^:]*):', "- $workdir\`$1:" } > "$dc.tmp"
 Move-Item "$dc.tmp" "$dc" -Force
 
 # start
@@ -103,7 +103,7 @@ This step-by-step will assume you choose $HOME/nadeko to store the Nadeko's data
 ```bash
 # you can modify thoses variables
 workdir="$HOME/nadeko"
-url_dc="https://raw.githubusercontent.com/Kwoth/NadekoBot/1.9/docker-compose.yml"
+url_dc="https://gitlab.com/Kwoth/nadekobot/raw/1.9/docker-compose.yml"
 
 # please do not modify thoses variables
 dc="$workdir/docker-compose.yml"
@@ -112,7 +112,7 @@ dc="$workdir/docker-compose.yml"
 mkdir -p "$workdir"
 wget -O "$dc" "$url_dc"
 sed -i -e 's/#\(image: kwoth\)/\1/' -e '/build:/d' "$dc"
-sed -i -e 's%- ./\([^:]*\):%- "'$workdir'/\1":%g' $dc
+sed -i -e 's%- ./\([^:]*\):%- '$workdir'/\1:%g' $dc
 
 # start
 cd "$workdir"
@@ -124,7 +124,7 @@ cd "$workdir"
 The script will:
 
 - create the nadeko's directory
-- download the [docker-compose.yml](https://raw.githubusercontent.com/Kwoth/NadekoBot/1.9/docker-compose.yml) that describe how to run the containers
+- download the [docker-compose.yml](https://gitlab.com/Kwoth/nadekobot/raw/1.9/docker-compose.yml) that describe how to run the containers
 - convert the docker-compose.yml from developer configuration to end-user configuration
 - edit the docker-compose.yml to specify full path instead of relative path
 - create and start the containers
@@ -151,4 +151,4 @@ WARNING: as the docker.sock is mount into this container, this means in fact tha
 
 If you have any issues with the docker setup, you can request some assistance in the in #help channel on our [Discord server](https://discordapp.com/invite/nadekobot), but indicate you are using the docker. As a last resort, you can ping the maintainer @Veovis in the #help channel.
 
-For information about configuring your bot or its functionality, please check the [documentation](http://nadekobot.readthedocs.io/en/latest).
+For information about configuring your bot or its functionality, please check the [documentation](https://nadekobot.readthedocs.io/en/latest).
