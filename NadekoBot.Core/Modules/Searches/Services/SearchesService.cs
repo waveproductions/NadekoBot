@@ -377,7 +377,7 @@ namespace NadekoBot.Modules.Searches.Services
             };
 
             bool added;
-            using (var uow = _db.UnitOfWork)
+            using (var uow = _db.GetDbContext())
             {
                 var gc = uow.GuildConfigs.ForId(guildId, set => set.Include(y => y.NsfwBlacklistedTags));
                 if (gc.NsfwBlacklistedTags.Add(tagObj))
@@ -393,7 +393,7 @@ namespace NadekoBot.Modules.Searches.Services
                 var newTags = new HashSet<string>(gc.NsfwBlacklistedTags.Select(x => x.Tag));
                 _blacklistedTags.AddOrUpdate(guildId, newTags, delegate { return newTags; });
 
-                uow.Complete();
+                uow.SaveChanges();
             }
             return added;
         }
@@ -576,7 +576,7 @@ namespace NadekoBot.Modules.Searches.Services
         {
             using (var http = _httpFactory.CreateClient())
             {
-                var res = await http.GetStringAsync(string.Format("https://omdbapi.nadekobot.me/?t={0}&y=&plot=full&r=json",
+                var res = await http.GetStringAsync(string.Format("https://omdbapi.nadeko.bot/?t={0}&y=&plot=full&r=json",
                     name.Trim().Replace(' ', '+'))).ConfigureAwait(false);
                 var movie = JsonConvert.DeserializeObject<OmdbMovie>(res);
                 if (movie?.Title == null)
