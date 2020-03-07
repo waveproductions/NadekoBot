@@ -146,12 +146,13 @@ namespace NadekoBot.Modules.Administration.Services
             if (!VcRoles.TryGetValue(guildId, out var guildVcRoles))
                 return false;
 
-            if (!guildVcRoles.TryGetValue(vcId, out _))
+            if (!guildVcRoles.TryRemove(vcId, out _))
                 return false;
 
             using (var uow = _db.GetDbContext())
             {
                 var conf = uow.GuildConfigs.ForId(guildId, set => set.Include(x => x.VcRoleInfos));
+                // todo this doesn't remove properly
                 conf.VcRoleInfos.RemoveWhere(x => x.VoiceChannelId == vcId);
                 uow.SaveChanges();
             }
