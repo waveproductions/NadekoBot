@@ -40,8 +40,7 @@ Why it uses remote database instead of the built-in SQLite? The answer is becaus
 You have two options here: MSSQL or PostgreSQL.
 
 MSSQL option:
-- If you don't have any SQL Server, you can temporary use [**gearhost**](https://www.gearhost.com/). Remember that it has *limited data-size* of 10mb.
-- In **credentials.json** use following type and connectionstring: 
+ - In **credentials.json** use following type and connectionstring: 
 	```json
 	"Type": "sqlserver",
 	"ConnectionString": "Data Source={address to database};Initial Catalog={database name};User ID={username};Password={password}"
