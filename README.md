@@ -4,7 +4,7 @@
 **NB!** This will deploy with using heroku's postgresql, if you need mssql use the manual method, if you need to use your custom postgresql its enough to just change the postgresql URI in the enviroments(Settings->Config Vars).
 
 
-![Don't read abobe](http://r52.cooltext.com/rendered/cooltext351355270836118.png)
+![Don't read abobe](http://r74.cooltext.com/rendered/cooltext351355577972240.png)
 
 # Below guide is a manual deployment method
 
