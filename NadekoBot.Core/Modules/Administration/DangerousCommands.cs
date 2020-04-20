@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Discord;
 using NadekoBot.Core.Modules.Administration.Services;
 using System.Linq;
+using NadekoBot.Core.Services;
 
 #if !GLOBAL_NADEKO
 namespace NadekoBot.Modules.Administration
@@ -16,7 +17,6 @@ namespace NadekoBot.Modules.Administration
         [OwnerOnly]
         public class DangerousCommands : NadekoSubmodule<DangerousCommandsService>
         {
-
             private async Task InternalExecSql(string sql, params object[] reps)
             {
                 sql = string.Format(sql, reps);
@@ -74,8 +74,7 @@ namespace NadekoBot.Modules.Administration
 
             [NadekoCommand, Usage, Description, Aliases]
             [OwnerOnly]
-            public Task DeleteWaifus() =>
-                SqlExec(DangerousCommandsService.WaifusDeleteSql);
+            public Task DeleteWaifus() => SqlExec(DangerousCommandsService.WaifusDeleteSql(_service.GetDbType));
 
             [NadekoCommand, Usage, Description, Aliases]
             [OwnerOnly]
@@ -85,22 +84,22 @@ namespace NadekoBot.Modules.Administration
             [NadekoCommand, Usage, Description, Aliases]
             [OwnerOnly]
             public Task DeleteWaifu(ulong userId) =>
-                InternalExecSql(DangerousCommandsService.WaifuDeleteSql, userId);
+                InternalExecSql(DangerousCommandsService.WaifuDeleteSql(_service.GetDbType), userId);
 
             [NadekoCommand, Usage, Description, Aliases]
             [OwnerOnly]
             public Task DeleteCurrency() =>
-                SqlExec(DangerousCommandsService.CurrencyDeleteSql);
+                SqlExec(DangerousCommandsService.CurrencyDeleteSql(_service.GetDbType));
 
             [NadekoCommand, Usage, Description, Aliases]
             [OwnerOnly]
             public Task DeletePlaylists() =>
-                SqlExec(DangerousCommandsService.MusicPlaylistDeleteSql);
+                SqlExec(DangerousCommandsService.MusicPlaylistDeleteSql(_service.GetDbType));
 
             [NadekoCommand, Usage, Description, Aliases]
             [OwnerOnly]
             public Task DeleteExp() =>
-                SqlExec(DangerousCommandsService.XpDeleteSql);
+                SqlExec(DangerousCommandsService.XpDeleteSql(_service.GetDbType));
 
             //[NadekoCommand, Usage, Description, Aliases]
             //[OwnerOnly]

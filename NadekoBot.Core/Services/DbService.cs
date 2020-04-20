@@ -8,6 +8,11 @@ using System.Linq;
 
 namespace NadekoBot.Core.Services
 {
+    public enum DatabaseTypeEnum
+    {
+        PostgreSql = 0,
+        SqlServer = 1
+    }
     public class DbService
     {
         private readonly DbContextOptions<NadekoContext> options;
@@ -67,5 +72,23 @@ namespace NadekoBot.Core.Services
         }
 
         public IUnitOfWork GetDbContext() => new UnitOfWork(GetDbContextInternal());
+
+        public DatabaseTypeEnum GetDatabaseType()
+        {
+            using (var uow = GetDbContext())
+            {
+                if (uow._context.Database.IsNpgsql())
+                {
+                    return DatabaseTypeEnum.PostgreSql;
+                }
+
+                if (uow._context.Database.IsSqlServer())
+                {
+                    return DatabaseTypeEnum.SqlServer;
+                }
+            }
+
+            throw new Exception();
+        }
     }
 }

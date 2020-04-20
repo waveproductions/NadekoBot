@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -8,28 +10,79 @@ namespace NadekoBot.Core.Modules.Administration.Services
 {
     public class DangerousCommandsService : INService
     {
-        public const string WaifusDeleteSql = @"DELETE FROM WaifuUpdates;
-DELETE FROM WaifuItem;
-DELETE FROM WaifuInfo;";
-        public const string WaifuDeleteSql = @"DELETE FROM WaifuUpdates WHERE UserId=(SELECT Id FROM DiscordUser WHERE UserId={0});
-DELETE FROM WaifuItem WHERE WaifuInfoId=(SELECT Id FROM WaifuInfo WHERE WaifuId=(SELECT Id FROM DiscordUser WHERE UserId={0}));
-UPDATE WaifuInfo SET ClaimerId=NULL WHERE ClaimerId=(SELECT Id FROM DiscordUser WHERE UserId={0});
-DELETE FROM WaifuInfo WHERE WaifuId=(SELECT Id FROM DiscordUser WHERE UserId={0});";
-        public const string CurrencyDeleteSql = "UPDATE DiscordUser SET CurrencyAmount=0; DELETE FROM CurrencyTransactions;";
-        public const string MusicPlaylistDeleteSql = "DELETE FROM MusicPlaylists;";
-        public const string XpDeleteSql = @"DELETE FROM UserXpStats;
-UPDATE DiscordUser
-SET ClubId=NULL,
-    IsClubAdmin=0,
-    TotalXp=0;
-DELETE FROM ClubApplicants;
-DELETE FROM ClubBans;
-DELETE FROM Clubs;";
-//        public const string DeleteUnusedCustomReactionsAndQuotes = @"DELETE FROM CustomReactions 
-//WHERE UseCount=0 AND (DateAdded < date('now', '-7 day') OR DateAdded is null);
+        public static string WaifusDeleteSql(DatabaseTypeEnum type)
+        {
+            if (type == DatabaseTypeEnum.PostgreSql)
+            {
+               return "DELETE FROM \"WaifuUpdates\";DELETE FROM \"WaifuItem\";DELETE FROM \"WaifuInfo\";";
+            }
 
-//DELETE FROM Quotes 
-//WHERE UseCount=0 AND (DateAdded < date('now', '-7 day') OR DateAdded is null);";
+            return "DELETE FROM WaifuUpdates;DELETE FROM WaifuItem;DELETE FROM WaifuInfo;"; ;
+        }
+
+
+        public static string WaifuDeleteSql(DatabaseTypeEnum type)
+        {
+            if (type == DatabaseTypeEnum.PostgreSql)
+            {
+                return @"DELETE FROM ""WaifuUpdates"" WHERE ""UserId""=(SELECT ""Id"" FROM ""DiscordUser"" WHERE ""UserId""={0});
+                    DELETE FROM ""WaifuItem"" WHERE ""WaifuInfoId""=(SELECT ""Id"" FROM ""WaifuInfo"" WHERE ""WaifuId""=(SELECT ""Id"" FROM ""DiscordUser"" WHERE ""UserId""={0}));
+                    UPDATE ""WaifuInfo"" SET ""ClaimerId""=NULL WHERE ""ClaimerId""=(SELECT ""Id"" FROM ""DiscordUser"" WHERE ""UserId""={0});
+                    DELETE FROM ""WaifuInfo"" WHERE ""WaifuId""=(SELECT ""Id"" FROM ""DiscordUser"" WHERE ""UserId""={0});";
+            }
+
+            return @"DELETE FROM WaifuUpdates WHERE UserId=(SELECT Id FROM DiscordUser WHERE UserId={0});
+                    DELETE FROM WaifuItem WHERE WaifuInfoId=(SELECT Id FROM WaifuInfo WHERE WaifuId=(SELECT Id FROM DiscordUser WHERE UserId={0}));
+                    UPDATE WaifuInfo SET ClaimerId=NULL WHERE ClaimerId=(SELECT Id FROM DiscordUser WHERE UserId={0});
+                    DELETE FROM WaifuInfo WHERE WaifuId=(SELECT Id FROM DiscordUser WHERE UserId={0});";
+        }
+
+        public static string CurrencyDeleteSql(DatabaseTypeEnum type)
+        {
+            if (type == DatabaseTypeEnum.PostgreSql)
+            {
+                return "UPDATE \"DiscordUser\" SET \"CurrencyAmount\"=0; DELETE FROM \"CurrencyTransactions\";";
+            }
+            return "UPDATE DiscordUser SET CurrencyAmount=0; DELETE FROM CurrencyTransactions;";
+        }
+
+        public static string MusicPlaylistDeleteSql(DatabaseTypeEnum type)
+        {
+            if (type == DatabaseTypeEnum.PostgreSql)
+            {
+                return "DELETE FROM \"MusicPlaylists\";";
+            }
+            return "DELETE FROM MusicPlaylists;";
+        }
+
+        public static string XpDeleteSql(DatabaseTypeEnum type)
+        {
+            if (type == DatabaseTypeEnum.PostgreSql)
+            {
+                return @"DELETE FROM ""UserXpStats"";
+                    UPDATE ""DiscordUser""
+                    SET ""ClubId""=NULL,
+                        ""IsClubAdmin""=false,
+                        ""TotalXp""=0;
+                    DELETE FROM ""ClubApplicants"";
+                    DELETE FROM ""ClubBans"";
+                    DELETE FROM ""Clubs"";";
+            }
+
+            return @"DELETE FROM UserXpStats;
+                    UPDATE DiscordUser
+                    SET ClubId=NULL,
+                        IsClubAdmin=0,
+                        TotalXp=0;
+                    DELETE FROM ClubApplicants;
+                    DELETE FROM ClubBans;
+                    DELETE FROM Clubs;";
+        }
+        //        public const string DeleteUnusedCustomReactionsAndQuotes = @"DELETE FROM CustomReactions 
+        //WHERE UseCount=0 AND (DateAdded < date('now', '-7 day') OR DateAdded is null);
+
+        //DELETE FROM Quotes 
+        //WHERE UseCount=0 AND (DateAdded < date('now', '-7 day') OR DateAdded is null);";
 
         private readonly DbService _db;
 
@@ -37,6 +90,8 @@ DELETE FROM Clubs;";
         {
             _db = db;
         }
+
+        internal DatabaseTypeEnum GetDbType => _db.GetDatabaseType();
 
         public async Task<int> ExecuteSql(string sql)
         {
